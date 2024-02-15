@@ -136,4 +136,9 @@ async def улыбаться(ctx):
             embed.set_image(url=random_gif)
             await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(f'{ctx.author.mention} Неопознанная команда. Пожалуйста, проверьте правильность ввода.')
+
 bot.run(env.TOKEN)
