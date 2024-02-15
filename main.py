@@ -26,93 +26,114 @@ async def злиться(ctx):
             await ctx.send(f"{ctx.author.mention} злится...", embed=embed)
 
 @bot.command()
-async def улыбаться(ctx):
-    directory = "smiles"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} улыбается:", file=picture)
+async def укусить(ctx, member: disnake.Member):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        bite_gifs = data.get("bite", [])
+        if bite_gifs:
+            random_gif = random.choice(bite_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} кусает {member.mention}...", embed=embed)
 
-@bot.command()
-async def укусить(ctx):
-    directory = "bite"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} кусает  :", file=picture)
 
 @bot.command()
 async def плакать(ctx):
-    directory = "cry"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} плачет:", file=picture)
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        cry_gifs = data.get("cry", [])
+        if cry_gifs:
+            random_gif = random.choice(cry_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} плачет...", embed=embed)
 
 @bot.command()
 async def танцевать(ctx):
-    directory = "dance"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} танцует:", file=picture)
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        dance_gifs = data.get("dance", [])
+        if dance_gifs:
+            random_gif = random.choice(dance_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} танцует...", embed=embed)
 
 @bot.command()
-async def обнять(ctx):
-    directory = "hug"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} обнимает  :", file=picture)
+async def обнять(ctx, member: disnake.Member):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        hug_gifs = data.get("hug", [])
+        if hug_gifs:
+            random_gif = random.choice(hug_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} обнимает {member.mention}...", embed=embed)
 
 @bot.command()
-async def поцеловать(ctx):
-    directory = "kiss"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} целует  :", file=picture)
+async def поцеловать(ctx, member: disnake.Member):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        kiss_gifs = data.get("kiss", [])
+        if kiss_gifs:
+            random_gif = random.choice(kiss_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} целует {member.mention}...", embed=embed)
 
 @bot.command()
-async def смеятся(ctx):
-    directory = "laugh"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} смеёться:", file=picture)
+async def смеяться(ctx):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        laugh_gifs = data.get("laugh", [])
+        if laugh_gifs:
+            random_gif = random.choice(laugh_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} смеётся...", embed=embed)
 
 @bot.command()
-async def гладить(ctx):
-    directory = "pat"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} гладит  :", file=picture)
+async def погладить(ctx, member: disnake.Member):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        pat_gifs = data.get("pat", [])
+        if pat_gifs:
+            random_gif = random.choice(pat_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} гладит {member.mention}...", embed=embed)
+
 
 @bot.command()
-async def ударить(ctx):
-    directory = "slap"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} бьёт :", file=picture)
+async def ударить(ctx, member: disnake.Member):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        slap_gifs = data.get("slap", [])
+        if slap_gifs:
+            random_gif = random.choice(slap_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} ударяет {member.mention}...", embed=embed)
+
+
+@bot.command()
+async def улыбаться(ctx):
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        smile_gifs = data.get("smile", [])
+        if smile_gifs:
+            random_gif = random.choice(smile_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
 
 bot.run(TOKEN)
