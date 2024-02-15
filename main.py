@@ -2,6 +2,7 @@ import disnake
 from disnake.ext import commands
 import random
 import os
+import json
 
 TOKEN = "MTIwNjI0MjExNjgyOTg0NzU5Mg.Gg4unf.yPK25jXRe1qC2TF_T-KOM19--GVlG3OHQUkAXk"
 
@@ -14,13 +15,15 @@ async def on_ready():
 
 @bot.command()
 async def злиться(ctx):
-    directory = "angry"
-    files = os.listdir(directory)
-    random_image = random.choice(files)
-    file_path = os.path.join(directory, random_image)
-    with open(file_path, 'rb') as f:
-        picture = disnake.File(f)
-        await ctx.send(f"{ctx.author.mention} злится:", file=picture)
+    with open("bd.json", 'r') as f:
+        data = json.load(f)
+        angry_gifs = data.get("angry", [])
+        if angry_gifs:
+            random_gif = random.choice(angry_gifs)
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image(url=random_gif)
+            await ctx.send(f"{ctx.author.mention} злится...", embed=embed)
 
 @bot.command()
 async def улыбаться(ctx):
