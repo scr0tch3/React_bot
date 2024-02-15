@@ -3,8 +3,8 @@ from disnake.ext import commands
 import random
 import os
 import json
+import env
 
-TOKEN = "MTIwNjI0MjExNjgyOTg0NzU5Mg.Gg4unf.yPK25jXRe1qC2TF_T-KOM19--GVlG3OHQUkAXk"
 
 bot = commands.Bot(command_prefix="!", help_command=None, intents=disnake.Intents.all(), test_guilds=[1159839672550297675]) 
 
@@ -136,4 +136,4 @@ async def улыбаться(ctx):
             embed.set_image(url=random_gif)
             await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
 
-bot.run(TOKEN)
+bot.run(env.TOKEN)
