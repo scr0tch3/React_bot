@@ -35,7 +35,7 @@ async def укусить(ctx, member: disnake.Member):
             embed = disnake.Embed()
             embed.colour = disnake.Colour.gold()
             embed.set_image(url=random_gif)
-            await ctx.send(f"{ctx.author.mention} кусает {member.mention}...", embed=embed)
+            await ctx.send(f"{ctx.author.mention} кусает {member.mention}:", embed=embed)
 
 
 @bot.command()
@@ -72,7 +72,7 @@ async def обнять(ctx, member: disnake.Member):
             embed = disnake.Embed()
             embed.colour = disnake.Colour.gold()
             embed.set_image(url=random_gif)
-            await ctx.send(f"{ctx.author.mention} обнимает {member.mention}...", embed=embed)
+            await ctx.send(f"{ctx.author.mention} обнимает {member.mention}:", embed=embed)
 
 @bot.command()
 async def поцеловать(ctx, member: disnake.Member):
@@ -84,7 +84,7 @@ async def поцеловать(ctx, member: disnake.Member):
             embed = disnake.Embed()
             embed.colour = disnake.Colour.gold()
             embed.set_image(url=random_gif)
-            await ctx.send(f"{ctx.author.mention} целует {member.mention}...", embed=embed)
+            await ctx.send(f"{ctx.author.mention} целует {member.mention}:", embed=embed)
 
 @bot.command()
 async def смеяться(ctx):
@@ -108,7 +108,7 @@ async def погладить(ctx, member: disnake.Member):
             embed = disnake.Embed()
             embed.colour = disnake.Colour.gold()
             embed.set_image(url=random_gif)
-            await ctx.send(f"{ctx.author.mention} гладит {member.mention}...", embed=embed)
+            await ctx.send(f"{ctx.author.mention} гладит {member.mention}:", embed=embed)
 
 
 @bot.command()
@@ -121,7 +121,7 @@ async def ударить(ctx, member: disnake.Member):
             embed = disnake.Embed()
             embed.colour = disnake.Colour.gold()
             embed.set_image(url=random_gif)
-            await ctx.send(f"{ctx.author.mention} ударяет {member.mention}...", embed=embed)
+            await ctx.send(f"{ctx.author.mention} ударяет {member.mention}:", embed=embed)
 
 
 @bot.command()
