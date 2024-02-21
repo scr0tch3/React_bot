@@ -1,11 +1,21 @@
-import os
-import random
-import main
-import json
 import disnake
-class Commands:
-    @main.bot.command()
-    async def злиться(ctx):
+from disnake.ext import commands
+import random
+import os
+import json
+
+class cogs(commands.Cog):
+
+    def __init__(self, bot):
+        self.bot = bot 
+    
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print(f"Bot {self.bot.user} is ready to work!")
+        await self.bot.change_presence(activity=disnake.Activity(type=disnake.ActivityType.playing, name="Чебупели"))
+
+    @commands.command()
+    async def злиться(self, ctx):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             angry_gifs = data.get("angry", [])
@@ -16,8 +26,8 @@ class Commands:
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} злится...", embed=embed)
 
-    @main.bot.command()
-    async def укусить(ctx, member: disnake.Member):
+    @commands.command()
+    async def укусить(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             bite_gifs = data.get("bite", [])
@@ -26,11 +36,11 @@ class Commands:
                 embed = disnake.Embed()
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
-                await ctx.send(f"{ctx.author.mention} кусает {member.mention}...", embed=embed)
+                await ctx.send(f"{ctx.author.mention} кусает {member.mention}:", embed=embed)
 
 
-    @main.bot.command()
-    async def плакать(ctx):
+    @commands.command()
+    async def плакать(self, ctx):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             cry_gifs = data.get("cry", [])
@@ -41,8 +51,8 @@ class Commands:
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} плачет...", embed=embed)
 
-    @main.bot.command()
-    async def танцевать(ctx):
+    @commands.command()
+    async def танцевать(self, ctx):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             dance_gifs = data.get("dance", [])
@@ -53,8 +63,8 @@ class Commands:
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} танцует...", embed=embed)
 
-    @main.bot.command()
-    async def обнять(ctx, member: disnake.Member):
+    @commands.command()
+    async def обнять(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             hug_gifs = data.get("hug", [])
@@ -63,10 +73,10 @@ class Commands:
                 embed = disnake.Embed()
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
-                await ctx.send(f"{ctx.author.mention} обнимает {member.mention}...", embed=embed)
+                await ctx.send(f"{ctx.author.mention} обнимает {member.mention}:", embed=embed)
 
-    @main.bot.command()
-    async def поцеловать(ctx, member: disnake.Member):
+    @commands.command()
+    async def поцеловать(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             kiss_gifs = data.get("kiss", [])
@@ -75,10 +85,10 @@ class Commands:
                 embed = disnake.Embed()
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
-                await ctx.send(f"{ctx.author.mention} целует {member.mention}...", embed=embed)
+                await ctx.send(f"{ctx.author.mention} целует {member.mention}:", embed=embed)
 
-    @main.bot.command()
-    async def смеяться(ctx):
+    @commands.command()
+    async def смеяться(self, ctx):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             laugh_gifs = data.get("laugh", [])
@@ -89,8 +99,8 @@ class Commands:
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} смеётся...", embed=embed)
 
-    @main.bot.command()
-    async def погладить(ctx, member: disnake.Member):
+    @commands.command()
+    async def погладить(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             pat_gifs = data.get("pat", [])
@@ -99,11 +109,11 @@ class Commands:
                 embed = disnake.Embed()
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
-                await ctx.send(f"{ctx.author.mention} гладит {member.mention}...", embed=embed)
+                await ctx.send(f"{ctx.author.mention} гладит {member.mention}:", embed=embed)
 
 
-    @main.bot.command()
-    async def ударить(ctx, member: disnake.Member):
+    @commands.command()
+    async def ударить(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             slap_gifs = data.get("slap", [])
@@ -112,11 +122,11 @@ class Commands:
                 embed = disnake.Embed()
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
-                await ctx.send(f"{ctx.author.mention} ударяет {member.mention}...", embed=embed)
+                await ctx.send(f"{ctx.author.mention} ударяет {member.mention}:", embed=embed)
 
 
-    @main.bot.command()
-    async def улыбаться(ctx):
+    @commands.command()
+    async def улыбаться(self, ctx):
         with open("bd.json", 'r') as f:
             data = json.load(f)
             smile_gifs = data.get("smile", [])
@@ -126,3 +136,13 @@ class Commands:
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
+    
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandNotFound):
+            await ctx.send(f'{ctx.author.mention} Неопознанная команда. Пожалуйста, проверьте правильность ввода.')
+
+
+
+def setup(bot):
+    bot.add_cog(cogs(bot))
