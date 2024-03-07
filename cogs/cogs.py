@@ -136,6 +136,28 @@ class cogs(commands.Cog):
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
+
+    # @commands.command()
+    # async def love(ctx, member1: disnake.Member, member2: disnake.Member):
+    #     love_percentage = random.randint(0, 100)
+
+    #     with open("bd.json", 'r') as f:
+    #         data = json.load(f)
+    #         if 0 <= love_percentage <= 30:
+    #             gif_key = "low"
+    #         elif 30 <= love_percentage <= 50:
+    #             gif_key = "mid"
+    #         else:
+    #             gif_key = "high"
+
+    #         ship_gifs = data.get("ship", {}).get(gif_key, [])
+    #         if ship_gifs:
+    #             random_gif = random.choice(ship_gifs)
+    #             embed = disnake.Embed(title="❤️ Любовный калькулятор ❤️",
+    #                                 description=f"{member1.mention} + {member2.mention} = {love_percentage}% ❤️",
+    #                                 color=0xff69b4)  # Розовый цвет
+    #             embed.set_image(url=random_gif)
+    #             await ctx.send(embed=embed)
     
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
