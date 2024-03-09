@@ -4,11 +4,12 @@ import random
 import os
 import json
 
+
 class cogs(commands.Cog):
 
     def __init__(self, bot):
-        self.bot = bot 
-    
+        self.bot = bot
+
     @commands.Cog.listener()
     async def on_ready(self):
         print(f"Bot {self.bot.user} is ready to work!")
@@ -37,7 +38,6 @@ class cogs(commands.Cog):
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} кусает {member.mention}:", embed=embed)
-
 
     @commands.command()
     async def плакать(self, ctx):
@@ -111,7 +111,6 @@ class cogs(commands.Cog):
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} гладит {member.mention}:", embed=embed)
 
-
     @commands.command()
     async def ударить(self, ctx, member: disnake.Member):
         with open("bd.json", 'r') as f:
@@ -124,7 +123,6 @@ class cogs(commands.Cog):
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} ударяет {member.mention}:", embed=embed)
 
-
     @commands.command()
     async def улыбаться(self, ctx):
         with open("bd.json", 'r') as f:
@@ -136,6 +134,45 @@ class cogs(commands.Cog):
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
+
+    @commands.command()
+    async def ятебявротебал(self, ctx):
+        with open("hum.jpg", 'rb') as f:
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image("hum.jpg")
+            await ctx.send(f":smiling_face_with_3_hearts:", embed=embed)
+
+    @commands.command()
+    async def da(self, ctx):
+        image_filename = "hum.jpg"
+        with open(image_filename, "rb") as image_file:
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            file = disnake.File("hum.jpg")
+            embed.set_image(file)
+            await ctx.send("da", embed=embed)
+
+    @commands.command()
+    async def шанс(self, ctx):
+        chances = random.randint(1, 100)
+        answerbad = "лох"
+        answergood = "умница"
+        combobad = f"Ваш шанс равен {chances} и вы {answerbad}"
+        combogood = f"Ваш шанс равен {chances} и вы {answergood}"
+        if (chances <= 50):
+            await ctx.send(combobad)
+        else:
+            await ctx.send(combogood)
+
+    @commands.command()
+    async def f(self, ctx, member: disnake.Member):    #ship
+        with open("hum.jpg", 'r') as f:
+            embed = disnake.Embed()
+            embed.colour = disnake.Colour.gold()
+            embed.set_image("hum.jpg")
+            await ctx.sendImage("hum.jpg")
+
 
     # @commands.command()
     # async def love(ctx, member1: disnake.Member, member2: disnake.Member):
@@ -158,12 +195,11 @@ class cogs(commands.Cog):
     #                                 color=0xff69b4)  # Розовый цвет
     #             embed.set_image(url=random_gif)
     #             await ctx.send(embed=embed)
-    
+
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
             await ctx.send(f'{ctx.author.mention} Неопознанная команда. Пожалуйста, проверьте правильность ввода.')
-
 
 
 def setup(bot):
