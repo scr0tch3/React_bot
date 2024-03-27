@@ -1,8 +1,11 @@
+import io
 import disnake
 from disnake.ext import commands
 import random
 import os
 import json
+from PIL import Image, ImageDraw, ImageFont
+import requests
 
 
 class cogs(commands.Cog):
@@ -62,6 +65,51 @@ class cogs(commands.Cog):
                 embed.colour = disnake.Colour.gold()
                 embed.set_image(url=random_gif)
                 await ctx.send(f"{ctx.author.mention} танцует...", embed=embed)
+
+    @commands.command()
+    async def wanted(self, ctx, member1: disnake.Member, member2: disnake.Member, ):
+
+        wanted = Image.open('wanted.jpg')
+        text = ImageDraw.Draw(wanted)
+        font = ImageFont.truetype("arialmt.ttf", 26)
+
+        avatar_url1 = member1.avatar.url
+        response1 = requests.get(avatar_url1)
+        avatar1 = Image.open(io.BytesIO(response1.content))
+        avatar1 = avatar1.resize((150, 150))
+
+        avatar_url2 = member2.avatar.url
+        response2 = requests.get(avatar_url2)
+        avatar2 = Image.open(io.BytesIO(response2.content))
+        avatar2 = avatar2.resize((150, 150))
+
+        # heart = Image.open("Heart.png")
+        #   heart.resize((100, 100))
+        # heart_without_background = heart.convert("L")
+
+        chances = random.uniform(1, 100)
+        formatted_number = "{:.2f}".format(chances)
+
+        #     if (chances <= 50):
+        #
+        #         heart = answerbad
+        #       else:
+        #          heart = answergood
+
+        wanted.paste(avatar1, (50, 50))
+        wanted.paste(avatar2, (370, 50))
+        # wanted.paste(wanted, heart, (235, 80), mask=heart)
+        text.text((245, 115), f"{formatted_number}%", font=font)
+
+        embed = disnake.Embed()
+        embed.colour = disnake.Colour.gold()
+        embed.set_image(wanted)
+
+        img_byte_array = io.BytesIO()
+        wanted.save(img_byte_array, format='PNG')
+        img_byte_array.seek(0)
+
+        await ctx.send(f"Шанс {member1.mention} & {member2.mention} = {formatted_number}%", file=disnake.File(img_byte_array, filename='ship.png'))
 
     @commands.command()
     async def обнять(self, ctx, member: disnake.Member):
@@ -137,42 +185,10 @@ class cogs(commands.Cog):
 
     @commands.command()
     async def ятебявротебал(self, ctx):
-        with open("hum.jpg", 'rb') as f:
-            embed = disnake.Embed()
-            embed.colour = disnake.Colour.gold()
-            embed.set_image("hum.jpg")
-            await ctx.send(f":smiling_face_with_3_hearts:", embed=embed)
-
-    @commands.command()
-    async def da(self, ctx):
-        image_filename = "hum.jpg"
-        with open(image_filename, "rb") as image_file:
-            embed = disnake.Embed()
-            embed.colour = disnake.Colour.gold()
-            file = disnake.File("hum.jpg")
-            embed.set_image(file)
-            await ctx.send("da", embed=embed)
-
-    @commands.command()
-    async def шанс(self, ctx):
-        chances = random.randint(1, 100)
-        answerbad = "лох"
-        answergood = "умница"
-        combobad = f"Ваш шанс равен {chances} и вы {answerbad}"
-        combogood = f"Ваш шанс равен {chances} и вы {answergood}"
-        if (chances <= 50):
-            await ctx.send(combobad)
-        else:
-            await ctx.send(combogood)
-
-    @commands.command()
-    async def f(self, ctx, member: disnake.Member):    #ship
-        with open("hum.jpg", 'r') as f:
-            embed = disnake.Embed()
-            embed.colour = disnake.Colour.gold()
-            embed.set_image("hum.jpg")
-            await ctx.sendImage("hum.jpg")
-
+        embed = disnake.Embed()
+        embed.colour = disnake.Colour.gold()
+        embed.set_image("https://i.pinimg.com/564x/61/21/80/6121801643f5dcb27ee14c2173b5ed35.jpg")
+        await ctx.send(embed=embed)
 
     # @commands.command()
     # async def love(ctx, member1: disnake.Member, member2: disnake.Member):

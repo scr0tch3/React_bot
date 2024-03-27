@@ -1,10 +1,13 @@
 import disnake
 from disnake.ext import commands
 import os
-import env
+from dotenv import load_dotenv
+
+load_dotenv()
+token = os.getenv("TOKEN")
 
 
-bot = commands.Bot(command_prefix="!", help_command=None, intents=disnake.Intents.all(), test_guilds=[1159839672550297675]) 
+bot = commands.Bot(command_prefix=":", help_command=None, intents=disnake.Intents.all(), test_guilds=[1159839672550297675])
 
 @bot.command()
 @commands.is_owner()
@@ -25,4 +28,4 @@ for filename in os.listdir("cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f"cogs.{filename[:-3]}")
 
-bot.run(env.TOKEN)
+bot.run(token)
