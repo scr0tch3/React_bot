@@ -7,7 +7,7 @@ load_dotenv()
 token = os.getenv("TOKEN")
 
 
-bot = commands.Bot(command_prefix=":", help_command=None, intents=disnake.Intents.all(), test_guilds=[1159839672550297675])
+bot = commands.Bot(command_prefix=':', help_command=None, intents=disnake.Intents.all(), test_guilds=[1159839672550297675])
 
 @bot.command()
 @commands.is_owner()

@@ -67,10 +67,14 @@ class cogs(commands.Cog):
                 await ctx.send(f"{ctx.author.mention} танцует...", embed=embed)
 
     @commands.command()
-    async def wanted(self, ctx, member1: disnake.Member, member2: disnake.Member, ):
+    async def wanted(self, ctx, member1: disnake.Member, member2: disnake.Member):
+        chances = random.uniform(1, 100)
+        formatted_number = "{:.2f}".format(chances)
+        wanted = Image.open('img/wanted.jpg')
 
-        wanted = Image.open('wanted.jpg')
         text = ImageDraw.Draw(wanted)
+        member1_name = ImageDraw.Draw(wanted)
+        member2_name = ImageDraw.Draw(wanted)
         font = ImageFont.truetype("arialmt.ttf", 26)
 
         avatar_url1 = member1.avatar.url
@@ -83,33 +87,44 @@ class cogs(commands.Cog):
         avatar2 = Image.open(io.BytesIO(response2.content))
         avatar2 = avatar2.resize((150, 150))
 
-        # heart = Image.open("Heart.png")
-        #   heart.resize((100, 100))
-        # heart_without_background = heart.convert("L")
-
-        chances = random.uniform(1, 100)
-        formatted_number = "{:.2f}".format(chances)
-
-        #     if (chances <= 50):
-        #
-        #         heart = answerbad
-        #       else:
-        #          heart = answergood
-
         wanted.paste(avatar1, (50, 50))
         wanted.paste(avatar2, (370, 50))
-        # wanted.paste(wanted, heart, (235, 80), mask=heart)
-        text.text((245, 115), f"{formatted_number}%", font=font)
+        text.text((240, 130), f"{formatted_number}%", font=font)
+        member1_name.text((85, 28), f"{member1.display_name}", font=font)
+        member2_name.text((400, 27), f"{member2.display_name}", font=font)
 
-        embed = disnake.Embed()
-        embed.colour = disnake.Colour.gold()
-        embed.set_image(wanted)
 
         img_byte_array = io.BytesIO()
         wanted.save(img_byte_array, format='PNG')
         img_byte_array.seek(0)
 
-        await ctx.send(f"Шанс {member1.mention} & {member2.mention} = {formatted_number}%", file=disnake.File(img_byte_array, filename='ship.png'))
+        with open("phrases.json", 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+            if chances <= 25:
+                phrases1 = data.get("0-25", [])
+                random_pr1 = random.choice(phrases1)
+                random_pr1 = random_pr1.replace("{member.mention}", member1.mention).replace("{member2.mention}",
+                                                                                             member2.mention)
+                await ctx.send(f"{random_pr1}", file=disnake.File(img_byte_array, filename='ship.png'))
+            elif 25 < chances <= 50:
+                phrases2 = data.get("25-50", [])
+                random_pr2 = random.choice(phrases2)
+                random_pr2 = random_pr2.replace("{member.mention}", member1.mention).replace("{member2.mention}",
+                                                                                             member2.mention)
+                await ctx.send(f"{random_pr2}", file=disnake.File(img_byte_array, filename='ship.png'))
+            elif 50 < chances:
+                phrases3 = data.get("50-75", [])
+                random_pr3 = random.choice(phrases3)
+                random_pr3 = random_pr3.replace("{member.mention}", member1.mention).replace("{member2.mention}",
+                                                                                             member2.mention)
+                await ctx.send(f"{random_pr3}", file=disnake.File(img_byte_array, filename='ship.png'))
+            else:
+                phrases4 = data.get("75-100", [])
+                random_pr4 = random.choice(phrases4)
+                random_pr4 = random_pr4.replace("{member.mention}", member1.mention).replace("{member2.mention}",
+                                                                                             member2.mention)
+                await ctx.send(f"{random_pr4}", file=disnake.File(img_byte_array, filename='ship.png'))
 
     @commands.command()
     async def обнять(self, ctx, member: disnake.Member):
@@ -184,39 +199,17 @@ class cogs(commands.Cog):
                 await ctx.send(f"{ctx.author.mention} улыбается...", embed=embed)
 
     @commands.command()
-    async def ятебявротебал(self, ctx):
+    async def gg(self, ctx):
         embed = disnake.Embed()
         embed.colour = disnake.Colour.gold()
-        embed.set_image("https://i.pinimg.com/564x/61/21/80/6121801643f5dcb27ee14c2173b5ed35.jpg")
+        embed.set_image("https://i.pinimg.com/564x/c8/4b/48/c84b481f32d0deff182c3638df29acfc.jpg")
         await ctx.send(embed=embed)
 
-    # @commands.command()
-    # async def love(ctx, member1: disnake.Member, member2: disnake.Member):
-    #     love_percentage = random.randint(0, 100)
-
-    #     with open("bd.json", 'r') as f:
-    #         data = json.load(f)
-    #         if 0 <= love_percentage <= 30:
-    #             gif_key = "low"
-    #         elif 30 <= love_percentage <= 50:
-    #             gif_key = "mid"
-    #         else:
-    #             gif_key = "high"
-
-    #         ship_gifs = data.get("ship", {}).get(gif_key, [])
-    #         if ship_gifs:
-    #             random_gif = random.choice(ship_gifs)
-    #             embed = disnake.Embed(title="❤️ Любовный калькулятор ❤️",
-    #                                 description=f"{member1.mention} + {member2.mention} = {love_percentage}% ❤️",
-    #                                 color=0xff69b4)  # Розовый цвет
-    #             embed.set_image(url=random_gif)
-    #             await ctx.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.CommandNotFound):
-            await ctx.send(f'{ctx.author.mention} Неопознанная команда. Пожалуйста, проверьте правильность ввода.')
-
+         if isinstance(error, commands.CommandNotFound):
+             await ctx.send(f'{ctx.author.mention} Неопознанная команда. Пожалуйста, проверьте правильность ввода.')
 
 def setup(bot):
     bot.add_cog(cogs(bot))

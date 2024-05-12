@@ -1,0 +1,26 @@
+{
+    "0-25": [
+        "{member.mention} и {member2.mention}, любовный процент оставляет желать лучшего...",
+        "Процент любви между {member.mention} и {member2.mention} - ну так себе...",
+        "{member.mention} и {member2.mention}, что сказать, можно и получше...",
+        "{member.mention} и {member2.mention}, помните, главное не грустить, не всегда все потерянно"
+    ],
+    "25-50": [
+        "{member.mention} и {member2.mention}, выглядит неплохо! Давайте не терять надежду.",
+        "{member.mention} и {member2.mention}, с каждым днем становится всё лучше и лучше!",
+        "{member.mention} и {member2.mention}, шансы на успех есть, продолжайте в том же духе!",
+        "{member.mention} и {member2.mention}, держите веселые мысли, и всё обязательно наладится!"
+    ],
+    "50-75": [
+        "{member.mention} и {member2.mention}, ваша любовь уже близка к пику! Продолжайте в том же духе!",
+        "{member.mention} и {member2.mention}, ваши отношения с каждым днем становятся крепче!",
+        "{member.mention} и {member2.mention}, счастье уже близко, давайте не останавливаться!",
+        "{member.mention} и {member2.mention}, ваша любовь – это прекрасно! Продолжайте радоваться друг другу!"
+    ],
+    "75-100": [
+        "{member.mention} и {member2.mention}, поздравляю! У вас идеальная пара, продолжайте в том же духе!",
+        "{member.mention} и {member2.mention}, ваши отношения – это пример для всех! Счастья вам!",
+        "{member.mention} и {member2.mention}, вы просто замечательны вместе! Не забывайте об этом!",
+        "{member.mention} и {member2.mention}, ваша любовь – это настоящий подарок! Продолжайте ценить друг друга!"
+    ]
+}
